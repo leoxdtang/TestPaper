@@ -22,6 +22,7 @@ class Exam:
              self.lst_items.append(ArithmeticItem.ArithmeticItem(MAX))
          
      def show_exam_info(self):
+         os.system("cls")
          # number of test items
          print("答题数:{}".format(self.n_item))
      
@@ -65,9 +66,27 @@ class Exam:
          return None
          
      def save_file(self):
+        if self.score is None: 
+            return None
+        
+        fn = str(datetime.now().strftime("%Y%m%d_%H%M%S")) +".txt"
+        report = ["答题数:{}".format(self.n_item)+'\n',
+                  "用时 :{} 秒".format((self.end_time-self.start_time).seconds)+'\n',
+                  "得分:{}".format(self.score)+'\n']
+        
+        
+        with open(fn,'w') as f:
+            f.writelines(report)
+            for i in self.lst_items:
+                f.writelines(str(i)+'\n')
+        
         return None
      
-# tp = Exam(N=5, MAX=99)
+# tp = Exam(N=3, MAX=99)
 # tp.start_test()
 # tp.show_exam_info()
+
+# tp.save_file()
+
+
 

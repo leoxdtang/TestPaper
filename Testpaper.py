@@ -15,12 +15,18 @@ date : 2019.12.14
 """
 
 import Exam
-
-     
+import os, sys
+import argparse
+    
 # 试卷程序测试
 if __name__ == "__main__":
-    tp = Exam.Exam(N=10, MAX=99)
-
+    # 处理参数
+    parser = argparse.ArgumentParser(usage="N:考试题目数，MAX：最大的数字", description="help info.")
+    parser.add_argument("--N", default=10, help="考试题目数.", dest="N")
+    parser.add_argument("--MAX", default=10, help="考试题目数.", dest="MAX")
+    args = parser.parse_args()
+    #开始测试
+    tp = Exam.Exam(N=int(args.N), MAX=int(args.MAX))
     tp.start_test()
     tp.show_exam_info()
     tp.save_file()
